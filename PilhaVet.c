@@ -79,10 +79,11 @@ void push(Pilha *p, float v)
     if (p->n == MAX)
     {
         printf("Capacidade da pilha estourou.\n");
-        exit(1);
+        return;
     }
-    p->vet[p->n] = v;
     p->n++;
+    p->vet[p->n] = v;
+    //p->n++;
 }
 
 void pop(Pilha *p)
@@ -92,11 +93,10 @@ void pop(Pilha *p)
     {
         printf("Pilha vazia.\n");
         return;
-       
     }
-    v = p->vet[p->n - 1];
+    v = p->vet[p->n];
     p->n--;
-    printf("Valor %.2f retirado\n",v);
+    printf("Valor %.2f retirado\n", v);
 }
 
 int vazia(Pilha *p)
@@ -111,11 +111,17 @@ void libera(Pilha *p)
 
 void mostrarPilha(Pilha *p)
 {
-    int tam = 0;
+    int tam = 1;
 
-    while (tam < p->n)
+    if (vazia(p))
     {
-        printf("item - %i - valor - %.2f\n", tam+1, p->vet[tam]);
+        printf("Pilha vazia.\n");
+        return;
+    }
+    
+    while (tam <= p->n)
+    {
+        printf("item - %i - valor - %.2f\n", tam, p->vet[tam]);
         tam++;
     }
 }
